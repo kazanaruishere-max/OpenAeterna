@@ -29,7 +29,7 @@ jobs:
         run: |
           set -euo pipefail
           forbidden='^(\.env$|\.env\..*|data/|logs/|\.handoff/|\.worktrees/|\.opencode/|ea/Reports/|ea/Config/.*\.ini$|.*\.secrets\.enc$|.*\.db$|.*\.db-wal$|.*\.db-shm$|.*\.log$|.*_KILLSWITCH\.lock$|.*_CIRCUIT_BREAKER\.lock$|^docs/AGENTS\.local\.md$|^docs/aeterna/agent-.*\.md$|^docs/aeterna/runbook-beta\.md$)'
-          if git ls-files | grep -E "$forbidden"; then
+          if git ls-files | grep -E "$forbidden" | grep -v '^\.env\.example$'; then
             echo "Forbidden tracked path found in release tree" >&2
             exit 1
           fi
