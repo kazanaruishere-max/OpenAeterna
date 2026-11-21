@@ -38,7 +38,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git grep -nIE 'EXNESS-MT5Trial|TELEGRAM_[0-9]{6,}|[0-9]{3}-[0-9]{3}-[0-9]{7}-[0-9]{3}|b022[0-9a-f-]{20,}' -- ':!LICENSE' ':!CHANGELOG.md'; then
+          if git grep -nIE 'EXNESS-MT5Trial|TELEGRAM_[0-9]{6,}|[0-9]{3}-[0-9]{3}-[0-9]{7}-[0-9]{3}|b022[0-9a-f-]{20,}' -- ':!LICENSE' ':!CHANGELOG.md' ':!.github/workflows/release.yml'; then
             echo "Forbidden content pattern found" >&2
             exit 1
           fi
