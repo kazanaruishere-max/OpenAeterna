@@ -70,7 +70,10 @@ jobs:
           uv run pyright
 
       - name: Verify Rust and Go
+        env:
+          PYO3_USE_ABI3_FORWARD_COMPATIBILITY: "1"
         run: |
+          export PYO3_PYTHON="$(uv run python -c 'import sys; print(sys.executable)')"
           cargo test --locked --manifest-path engine/analysis_engine/rust/Cargo.toml --all
           cargo clippy --locked --manifest-path engine/analysis_engine/rust/Cargo.toml --all-targets --all-features -- -D warnings
           cd engine/watchdog && go test ./... -count=1 && go vet ./...
